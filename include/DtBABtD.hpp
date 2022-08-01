@@ -3,6 +3,11 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
+
+int VectorToInt(std::vector<int> V);
+
+std::vector<int> IntToVector(int integer);
 
 int DecimalToBinary(int d);
 
