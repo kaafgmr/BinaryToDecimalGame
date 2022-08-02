@@ -16,8 +16,6 @@ std::vector<Bit*> CreateBits(int size, int amount)
 		bytes.push_back(new Bit(increment * 0.5f + x * increment, NOE_ObtenAltoPantalla() * 0.5f, size/(amount*0.3f)));
 	}
 
-	std::reverse(bytes.begin(), bytes.end());
-
 	return bytes;
 }
 
@@ -29,13 +27,13 @@ void main()
 	int numberOfBits = 8;
 	int bitSize = 100;
 	std::vector<Bit*> bitsList;
-	std::vector<int> states;
 
 	bitsList = CreateBits(bitSize, numberOfBits);
 
 	while(!NOE_ObtenTeclaPulsada(NOE_TECLA_ESCAPE))
 	{
 		NOE_Actualiza();
+		std::vector<int> states;
 
 		if (NOE_ObtenTeclaAbajo(NOE_TECLA_W))
 		{
@@ -60,17 +58,11 @@ void main()
 		{
 			bitsList[i]->Update();
 			states.push_back(bitsList[i]->getState());
-
 		}
-		
-		//int BinaryNumber = VectorToInt(states);
-		
 
 		//set the text value
-		sprintf(DecimalNumber, "1234");
-
-
-
+		int BinaryNumber = VectorToInt(states);
+		sprintf(DecimalNumber, "%d", BinaryToDecimal(BinaryNumber));
 
 		NOE_LimpiaPantalla(255 / 2, 255 / 2, 255 / 2);
 

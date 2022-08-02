@@ -17,12 +17,14 @@ std::vector<int> IntToVector(int integer)
 {
 	std::vector<int> V;
 	
-	while (integer != 0)
+	while (integer > 0)
 	{
-		int Remainder = integer % 2;
-		integer = integer / 2;
+		int Remainder = integer % 10;
+		integer = integer / 10;
 		V.push_back(Remainder);
 	}
+
+	std::reverse(V.begin(), V.end());
 
 	return V;
 }
@@ -30,9 +32,14 @@ std::vector<int> IntToVector(int integer)
 int DecimalToBinary(int d) 
 {
 	std::vector<int> BN;
-	int BinaryNumber = 0;
+	int BinaryNumber = d;
 
-	BN = IntToVector(d);
+	while (BinaryNumber > 0)
+	{
+		int Remainder = BinaryNumber % 2;
+		BinaryNumber /= 2;
+		BN.push_back(Remainder);
+	}
 
 	std::reverse(BN.begin(), BN.end());
 
@@ -44,12 +51,16 @@ int DecimalToBinary(int d)
 int BinaryToDecimal(int b)
 {
 	std::vector<int> BinaryNumber;
+	int Decimal = 0;
 
 	BinaryNumber = IntToVector(b);
 
 	std::reverse(BinaryNumber.begin(), BinaryNumber.end());
 
-	int Decimal = VectorToInt(BinaryNumber);
+	for (int i = 0; i < BinaryNumber.size(); i++)
+	{
+		Decimal = Decimal + BinaryNumber[i] * pow(2, i);
+	}
 
 	return Decimal;
 }
